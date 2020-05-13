@@ -1,0 +1,67 @@
+/*#root {*/
+/*    height: 100%;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+
+table {
+    table-layout: fixed;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: yellow;
+    border: 1px solid blueviolet;
+    text-align: center;
+    padding: 8px;
+}
+
+td {
+    border: 1px solid blueviolet;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: lightblue;
+}
+
+.css-2b097c-container {
+    width: 12%;
+}
+
+.form {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 10px 0 10px 0;
+}
+
+.form label {
+    margin: -20px 10px 5px 0;
+}
+
+.form input {
+    width: 100%;
+    vertical-align: middle;
+    margin: 10px 10px 5px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: dodgerblue;
+    border: 1px solid grey;
+    color: white;
+    cursor: pointer;
+    margin: 10px 0 10px 0
+}
+
+button:active {
+    background-color: darkblue;
+}
