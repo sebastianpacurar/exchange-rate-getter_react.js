@@ -1,1 +1,1 @@
-This project is about calculation the exchange rates differences between certain dates the user selects. It also shows the difference between certain rates
+This project is about calculation of different exchange rates between certain dates the user selects. It supports 30 different currencies
