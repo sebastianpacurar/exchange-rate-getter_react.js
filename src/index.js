@@ -63,6 +63,7 @@ const SelectCurrency = ({performOnChange}) => {
         {value: 'CNY', label: 'Chinese Yuan'},
         {value: 'HRK', label: 'Croatian Kuna'},
         {value: 'CZK', label: 'Czech Koruna'},
+        {value: 'DKK', label: 'Danish Krone'},
         {value: 'GBP', label: 'Great Britain Pound Sterling'},
         {value: 'HKD', label: 'Hong Kong Dollar'},
         {value: 'HUF', label: 'Hungarian Forint'},
