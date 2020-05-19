@@ -9,7 +9,7 @@ table {
     table-layout: fixed;
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 50%;
 }
 
 th {
@@ -31,6 +31,7 @@ tr:nth-child(even) {
 
 .css-2b097c-container {
     width: 12%;
+    margin: 0 0 10px 0;
 }
 
 .form {
