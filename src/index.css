@@ -6,15 +6,18 @@
 /*}*/
 
 table {
-    table-layout: fixed;
+    table-layout: auto;
+    width: 50%;
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 50%;
 }
 
 th {
+    position: sticky;
+    top: -1px;
     background-color: yellow;
     border: 1px solid blueviolet;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
     text-align: center;
     padding: 8px;
 }
@@ -52,17 +55,4 @@ tr:nth-child(even) {
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: dodgerblue;
-    border: 1px solid grey;
-    color: white;
-    cursor: pointer;
-    margin: 10px 0 10px 0
-}
-
-button:active {
-    background-color: darkblue;
 }
