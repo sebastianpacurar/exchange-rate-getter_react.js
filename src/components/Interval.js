@@ -1,17 +1,17 @@
-import React from "react";
+import React, {Fragment} from "react";
 
-const Interval = ({performOnChange, isChecked}) => {
+const Interval = ({handleOnChange, isChecked}) => {
     return (
-        <div>
+        <Fragment>
             <input
                 type='checkbox'
                 id='interval'
                 name='interval'
                 checked={isChecked}
-                onChange={performOnChange}
+                onChange={handleOnChange}
             />
             <label htmlFor='interval'> Interval</label>
-        </div>
+        </Fragment>
     );
 }
 
