@@ -1,29 +1,90 @@
 import React from 'react';
 
+// MaterialUI related
+import {makeStyles} from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import {
+    TableContainer,
+    Table,
+    TableHead,
+    TableBody,
+    TableRow,
+    TableCell,
+} from '@material-ui/core';
+
+
+const useStyles = makeStyles({
+
+    'table': {
+        minWidth: 650,
+    },
+
+    'head': {
+        backgroundColor: 'orange',
+    },
+
+
+    'bordered': {
+        border: 'solid lightgrey 1px'
+    },
+
+    'rowColor': {
+        '&:nth-of-type(odd)': {
+            backgroundColor: '#E8E8E8',
+        }
+    }
+});
+
+
 const CurrencyTable = ({currencies, mainCurrency}) => {
+
+
+    const classes = useStyles();
+
     return (
-        <table>
+        <TableContainer>
+            <Table
+                className={classes.table}
+                size='small'
+            >
+                <TableHead>
+                    <TableRow className={classes.head}>
 
-            <thead>
-            <tr>
-                <th>Currency Code</th>
-                <th>1 {mainCurrency} equals to</th>
-                <th>Date</th>
-            </tr>
-            </thead>
-            <tbody>
+                        <TableCell align='center' className={classes.bordered}>
+                            <Typography variant='h5'>Currency Code</Typography>
+                        </TableCell>
+                        <TableCell align='center' className={classes.bordered}>
+                            <Typography variant='h5'>1 {mainCurrency} equals to</Typography>
+                        </TableCell>
+                        <TableCell align='center' className={classes.bordered}>
+                            <Typography variant='h5'>Date</Typography>
+                        </TableCell>
 
-            {/*the data displayed will be in this order: currency, value, date*/}
-            {currencies.map((item, index) => (
-                <tr key={index}>
-                    <td>{item.currency}</td>
-                    <td>{item.value}</td>
-                    <td>{item.date}</td>
-                </tr>
-            ))}
-            </tbody>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
 
-        </table>
+                    {currencies.map((item, index) => (
+                        <TableRow
+                            key={`row-${index}`}
+                            className={classes.rowColor}
+                            hover
+                        >
+                            <TableCell align='center' className={classes.bordered}>
+                                <Typography variant='h6'>{item.currency}</Typography>
+                            </TableCell>
+                            <TableCell align='center' className={classes.bordered}>
+                                <Typography variant='h6'>{item.value}</Typography>
+                            </TableCell>
+                            <TableCell align='center' className={classes.bordered}>
+                                <Typography variant='h6'>{item.date}</Typography>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+
+                </TableBody>
+            </Table>
+        </TableContainer>
     )
 }
 
