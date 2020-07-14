@@ -3,7 +3,6 @@ import React, {Fragment} from 'react';
 const DateInput = ({maxDate, handleOnChange}) => {
     return (
         <Fragment>
-
             {/* start date */}
             <label htmlFor='Start Date' className='form'>Start Date: </label>
             <input

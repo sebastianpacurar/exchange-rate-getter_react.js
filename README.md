@@ -24,7 +24,7 @@
 
 
 # How to run
-* Open one terminal, change directory to <location of repo/exchange-rate-getter_react.js, and run the following command:
+* Open one terminal, change directory to **<location_of_repo>/exchange-rate-getter_react.js**, and run the following command:
     ```
         npm start
     ```
