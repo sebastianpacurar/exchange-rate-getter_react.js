@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 // MaterialUI related
 import {
@@ -16,6 +17,10 @@ const useStyles = makeStyles({
 
     appBar: {
         alignItems: 'center',
+    },
+
+    bottom: {
+        marginBottom: '25px'
     }
 });
 
@@ -27,14 +32,13 @@ const AppHeader = () => {
         <div className={classes.root}>
             <AppBar
                 position="static"
-                className={classes.appBar}
+                className={classNames(classes.appBar, classes.bottom)}
                 color='primary'
-                gutterBottom
             >
                 <Toolbar>
 
                     <Typography variant='h4' align='center'>
-                        Currency Values generator
+                        Exchange Rate Getter
                     </Typography>
 
                 </Toolbar>

@@ -1,15 +1,15 @@
 import React, {Fragment, useState, useEffect} from 'react';
 
 // components related
-import Interval from './Interval';
-import DateInput from './DateInput';
+import DateHandler from './DateHandler';
 import SelectCurrency from './SelectCurrency';
 import CurrencyTable from './CurrencyTable'
 import ErrorDateMessage from './ErrorMessage';
 import AppHeader from './Header';
 
 // MaterialUI related
-import {Grid, Box} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 
 const App = () => {
@@ -23,8 +23,8 @@ const App = () => {
         end: currentDate
     });
 
-    // used for querying rates from different dates (historical data). if checked is true then historical data will be queried
-    const [checked, setChecked] = useState(false);
+    // used for querying rates from different dates (historical data). if intervalChecked is true then historical data will be queried
+    const [intervalChecked, setIntervalChecked] = useState(false);
 
     // the state used to grab information from the SelectCurrency component
     const [selectedCurrency, setSelectedCurrency] = useState({
@@ -54,10 +54,10 @@ const App = () => {
     }
 
     // handle the Interval checkbox for multiple dates
-    const handleIntervalCheck = e => setChecked(e.target.checked);
+    const handleIntervalCheck = e => setIntervalChecked(e.target.checked);
 
 
-    // fetch data from the API whenever the selects or date or checked states are changed
+    // fetch data from the API whenever the selects or date or intervalChecked states are changed
     useEffect(() => {
 
         // fetch data from the API for the given details
@@ -66,7 +66,7 @@ const App = () => {
             let url = `https://api.exchangeratesapi.io/latest?base=${selectedCurrency.main}`;
             const result = [];
 
-            if (!checked) {
+            if (!intervalChecked) {
 
                 if (selectedCurrency.optional !== 'false') url = `https://api.exchangeratesapi.io/latest?symbols=${selectedCurrency.optional}&base=${selectedCurrency.main}`
 
@@ -95,7 +95,7 @@ const App = () => {
 
                     url = `https://api.exchangeratesapi.io/history?start_at=${yesterday}&end_at=${date.end}&base=${selectedCurrency.main}`
 
-                    // if optional currency is checked add symbol
+                    // if optional currency is intervalChecked add symbol
                     if (selectedCurrency.optional !== 'false') {
                         url = `https://api.exchangeratesapi.io/history?start_at=${yesterday}&end_at=${date.end}&symbols=${selectedCurrency.optional}&base=${selectedCurrency.main}`
                     }
@@ -144,13 +144,12 @@ const App = () => {
             .then(res => setData(res))
             .catch(err => console.log(err));
 
-    }, [selectedCurrency, date, checked, currentDate]);
+    }, [selectedCurrency, date, intervalChecked, currentDate]);
 
 
     return (
         <Fragment>
-
-            <Grid container xs={12}>
+            <Grid container>
                 <Grid item xs={12}>
                     <AppHeader/>
                 </Grid>
@@ -161,22 +160,14 @@ const App = () => {
                      */}
                 <Box pl={2}>
 
-                    <Grid item container xs={12}>
+                    <Grid item container>
                         <Grid item xs={12}>
 
-                            <DateInput
+                            <DateHandler
                                 maxDate={currentDate}
-                                handleOnChange={e => handleDateChange(e)}
-                            />
-
-
-                        </Grid>
-
-                        <Grid item xs={12}>
-
-                            <Interval
-                                isChecked={checked}
-                                handleOnChange={e => handleIntervalCheck(e)}
+                                handleDateOnChange={e => handleDateChange(e)}
+                                isIntervalChecked={intervalChecked}
+                                handleIntervalOnChange={e => handleIntervalCheck(e)}
                             />
 
                         </Grid>
@@ -188,22 +179,24 @@ const App = () => {
 
                 </Box>
 
+                <Grid item xs={12}>
+                    <Box padding={2}>
+                        {(new Date(date.start) > new Date(date.end) || new Date(date.start) < new Date('2015-01-01')) && intervalChecked
 
-                {(new Date(date.start) > new Date(date.end) || new Date(date.start) < new Date('2015-01-01')) && checked
-
-                    ?
-                    // if Start Date is bigger than End Date and interval is checked or Start Date is lower than 2015, render Error Message
-                    <ErrorDateMessage
-                        value={"Start Date cannot be bigger than End Date and Start Date cannot be lower than 2015-01-01. Please pick a valid date interval"}
-                    />
+                            ?
+                            // if Start Date is bigger than End Date and interval is intervalChecked or Start Date is lower than 2015, render Error Message
+                            <ErrorDateMessage
+                                value={"Start Date cannot be bigger than End Date and Start Date cannot be lower than 2015-01-01. Please pick a valid date interval"}
+                            />
 
 
-                    :
-                    // if Start Date is smaller than End Date and interval is not checked, render table
-                    <CurrencyTable currencies={data} mainCurrency={selectedCurrency.main}/>
+                            :
+                            // if Start Date is smaller than End Date and interval is not intervalChecked, render table
+                            <CurrencyTable currencies={data} mainCurrency={selectedCurrency.main}/>
 
-                }
-
+                        }
+                    </Box>
+                </Grid>
 
             </Grid>
         </Fragment>

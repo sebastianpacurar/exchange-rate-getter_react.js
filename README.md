@@ -33,6 +33,15 @@
 <br />
 
 
+# SIde Notes:
+* The project contains 2 versions. One in a basic CSS form, and one using Material UI:
+    * branch ***master-basic*** contains the CSS form
+    * branch ***master*** contains the Material UI implementation form
+    
+* Material UI has been implemented on most of the Components. The only left Component to be implemented with Material UI is the SelectCurrency Component.
+
+<br />
+      
     
 # Creator
 * [Sebastian Pacurar](https://github.com/sebastianpacurar)
