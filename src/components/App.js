@@ -1,4 +1,4 @@
-import React, {Fragment, StrictMode, useState, useEffect} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import '../index.css';
 
 
@@ -147,35 +147,33 @@ const App = () => {
 
     return (
         <Fragment>
-            <StrictMode>
-                <DateInput
-                    maxDate={currentDate}
-                    handleOnChange={e => handleDateChange(e)}
+            <DateInput
+                maxDate={currentDate}
+                handleOnChange={e => handleDateChange(e)}
+            />
+
+            <Interval
+                isChecked={checked}
+                handleOnChange={e => handleIntervalCheck(e)}
+            />
+
+            {/*in order to set the state of the Select, it will be performed using onChange and the target is the e.target.value*/}
+            <SelectCurrency handleOnChange={e => handleSelectChange(e)}/>
+
+            {(new Date(date.start) > new Date(date.end) || new Date(date.start) < new Date('2015-01-01')) && checked
+
+                ?
+                // if Start Date is bigger than End Date and interval is checked or Start Date is lower than 2015, render Error Message
+                <ErrorDateMessage
+                    value={"Start Date cannot be bigger than End Date and Start Date cannot be lower than 2015-01-01. Please pick a valid date interval"}
                 />
 
-                <Interval
-                    isChecked={checked}
-                    handleOnChange={e => handleIntervalCheck(e)}
-                />
 
-                {/*in order to set the state of the Select, it will be performed using onChange and the target is the e.target.value*/}
-                <SelectCurrency handleOnChange={e => handleSelectChange(e)}/>
+                :
+                // if Start Date is smaller than End Date and interval is not checked, render table
+                <CurrencyTable currencies={data} mainCurrency={selectedCurrency.main}/>
 
-                {(new Date(date.start) > new Date(date.end) || new Date(date.start) < new Date('2015-01-01')) && checked
-
-                    ?
-                    // if Start Date is bigger than End Date and interval is checked or Start Date is lower than 2015, render Error Message
-                    <ErrorDateMessage
-                        value={"Start Date cannot be bigger than End Date and Start Date cannot be lower than 2015-01-01. Please pick a valid date interval"}
-                    />
-
-
-                    :
-                    // if Start Date is smaller than End Date and interval is not checked, render table
-                    <CurrencyTable currencies={data} mainCurrency={selectedCurrency.main}/>
-
-                }
-            </StrictMode>
+            }
         </Fragment>
     );
 }
