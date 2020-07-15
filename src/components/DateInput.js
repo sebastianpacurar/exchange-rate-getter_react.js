@@ -10,6 +10,7 @@ const DateInput = ({maxDate, handleOnChange}) => {
                 name='start'
                 type='date'
                 className='form'
+                min='2015-01-01'
                 max={maxDate}
                 onChange={handleOnChange}
             />
@@ -20,12 +21,12 @@ const DateInput = ({maxDate, handleOnChange}) => {
                 name='end'
                 type='date'
                 className='form'
+                min='2015-01-01'
                 max={maxDate}
                 onChange={handleOnChange}
             />
         </Fragment>
     );
 }
-
 
 export default DateInput;

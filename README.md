@@ -24,7 +24,7 @@
 
 
 # How to run
-* Open one terminal, change directory to <location of repo/exchange-rate-getter_react.js, and run the following command:
+* Open one terminal, change directory to **<location_of_repo>/exchange-rate-getter_react.js**, and run the following command:
     ```
         npm start
     ```
@@ -33,6 +33,14 @@
 <br />
 
 
+# SIde Notes:
+* The project contains 2 versions. One in a basic CSS form, and one using Material UI:
+    * branch ***master-basic*** contains the CSS form
+    * branch ***master*** contains the Material UI implementation form
+    
+    
+<br />
+      
     
 # Creator
 * [Sebastian Pacurar](https://github.com/sebastianpacurar)

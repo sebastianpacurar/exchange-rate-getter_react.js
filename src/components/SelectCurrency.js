@@ -30,5 +30,4 @@ const SelectCurrency = ({handleOnChange}) => {
     )
 }
 
-
 export default SelectCurrency;
