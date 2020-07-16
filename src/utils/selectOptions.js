@@ -10,7 +10,7 @@ export const options = [
     {value: 'CZK', label: 'Czech Koruna'},
     {value: 'DKK', label: 'Danish Krone'},
     {value: 'EUR', label: 'Euro'},
-    {value: 'GBP', label: 'Great Britain Pound Sterling'},
+    {value: 'GBP', label: 'Great Britain Pound'},
     {value: 'HKD', label: 'Hong Kong Dollar'},
     {value: 'HUF', label: 'Hungarian Forint'},
     {value: 'INR', label: 'Indian Rupee'},
