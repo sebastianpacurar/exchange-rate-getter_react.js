@@ -3,14 +3,16 @@ import React, {Fragment} from "react";
 const Interval = ({handleOnChange, isChecked}) => {
     return (
         <Fragment>
-            <input
-                type='checkbox'
-                id='interval'
-                name='interval'
-                checked={isChecked}
-                onChange={handleOnChange}
-            />
-            <label htmlFor='interval'> Interval</label>
+            <label htmlFor='interval' className='form'>Interval:
+                <input
+                    type='checkbox'
+                    id='interval'
+                    name='interval'
+                    className='form'
+                    checked={isChecked}
+                    onChange={handleOnChange}
+                />
+            </label>
         </Fragment>
     );
 }

@@ -36,24 +36,33 @@ const App = () => {
 
     // handle the input start date value dynamically
     const handleDateChange = e => {
-        const inputType = e.target.name
 
         setDate({
-            ...date, [inputType]: e.target.value
+            ...date, [e.target.name]: e.target.value
         })
     }
 
     const handleSelectChange = e => {
-        const type = e.target.name;
 
         setSelectedCurrency({
-            ...selectedCurrency, [type]: e.target.value
+            ...selectedCurrency, [e.target.name]: e.target.value
         });
     }
 
     // handle the Interval checkbox for multiple dates
     const handleIntervalCheck = e => setChecked(e.target.checked);
 
+    // handle the switch currencies change
+    const handleSwitchChange = () => {
+
+        const main = selectedCurrency.main
+        const optional = selectedCurrency.optional
+
+        setSelectedCurrency({
+            main: optional,
+            optional: main
+        });
+    }
 
     // fetch data from the API whenever the selects or date or checked states are changed
     useEffect(() => {
@@ -147,20 +156,29 @@ const App = () => {
 
     return (
         <Fragment>
-            <DateInput
-                maxDate={currentDate}
-                handleOnChange={e => handleDateChange(e)}
-            />
+            <div className='container-date'>
+                <DateInput
+                    maxDate={currentDate}
+                    handleOnChange={handleDateChange}
+                />
 
-            <Interval
-                isChecked={checked}
-                handleOnChange={e => handleIntervalCheck(e)}
-            />
+                <Interval
+                    isChecked={checked}
+                    handleOnChange={handleIntervalCheck}
+                />
+            </div>
+            <div className='container-select'>
 
-            {/*in order to set the state of the Select, it will be performed using onChange and the target is the e.target.value*/}
-            <SelectCurrency handleOnChange={e => handleSelectChange(e)}/>
 
-            {(new Date(date.start) > new Date(date.end) || new Date(date.start) < new Date('2015-01-01')) && checked
+                {/*in order to set the state of the Select, it will be performed using onChange and the target is the e.target.value*/}
+                <SelectCurrency
+                    handleCurrencyOnChange={handleSelectChange}
+                    isDisabled={selectedCurrency.optional === 'false'}
+                    handleSwitchCurrencies={handleSwitchChange}
+                />
+            </div>
+
+            {new Date(date.start) > new Date(date.end) && checked
 
                 ?
                 // if Start Date is bigger than End Date and interval is checked or Start Date is lower than 2015, render Error Message
