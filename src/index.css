@@ -1,6 +1,30 @@
-table {
-    table-layout: auto;
+body {
+    margin: 0;
+    background-color: navajowhite;
+}
+
+#header {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    background-color: #20b2aa;
+    margin-bottom: 20px;
     width: 100%;
+    position: relative;
+    align-items: center;
+    box-shadow: 0 2px 10px -1px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+    text-align: center;
+    width: 100%;
+}
+
+table {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
     font-family: arial, sans-serif;
     border-collapse: collapse;
 }
@@ -22,8 +46,17 @@ td {
 }
 
 tr:nth-child(even) {
+    background-color: #e8e8e8;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+tr:hover {
     background-color: lightblue;
 }
+
 
 select {
     text-indent: 5px;
@@ -34,45 +67,39 @@ select {
     color: #8a2be2;
     line-height: 1.3;
     padding: .6em 1.4em .5em .8em;
-    width: 250px;
+    width: 275px;
     max-width: 100%;
-    box-sizing: border-box;
+    height: 45px;
     border: 1px solid #8a2be2;
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
     border-radius: .5em;
-    margin-bottom: 10px;
+    outline: none
 }
 
 select > option {
     color: #8a2be2;
+    outline: none
 }
 
-.form {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    margin: 10px 0 10px 0;
-}
 
 label {
     font-family: arial, sans-serif;
     font-weight: bold;
     font-size: 20px;
-    margin: -20px 10px 5px 0;
 }
 
-
-.form input {
-    width: 100%;
-    vertical-align: middle;
-    margin: 10px 10px 5px 0;
+input[type='date'] {
+    width: 250px;
+    display: block;
     padding: 10px;
     background-color: antiquewhite;
     border: 1px solid whitesmoke;
+    outline: none;
 }
 
-#interval {
+input[type='checkbox'] {
     transform: scale(1.5);
+    display: inline-block;
 }
 
 p {
@@ -93,7 +120,7 @@ button {
     width: 110px;
     height: 45px;
     outline: none;
-    margin: 10px 0 0 0;
+    margin-top: 25px;
 }
 
 button:hover {
@@ -105,18 +132,105 @@ button:active {
 }
 
 button:disabled {
-    background-color: darkgrey;
+    background-color: #a9a9a9;
 }
 
-.container-date {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
+#scroll-to-top {
+    position: fixed;
+    bottom: 13%;
+    right: 1.5%;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: lightgreen;
+    color: #8a2be2;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 18px;
+    opacity: 0.7;
+    width: 75px;
 }
 
-.container-select {
-    margin: 20px 0 20px 0;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+
+    grid-template-areas:
+    "start end interval"
+    "from to switch";
+}
+
+#start-date {
+    grid-area: start
+}
+
+#end-date {
+    grid-area: end
+}
+
+#interval-label {
+    grid-area: interval
+}
+
+#from-currency {
+    grid-area: from
+}
+
+#to-currency {
+    grid-area: to
+}
+
+#switch-currencies {
+    grid-area: switch
+}
+
+.grid-item {
+    justify-self: center;
+    align-self: center;
+}
+
+/* for screen smaller than 1000 px, apply mobile view*/
+@media screen and (max-width: 1000px) {
+    .container {
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas:
+        "start"
+        "end"
+        "interval"
+        "from"
+        "switch"
+        "to";
+    }
+
+    input[type='date'] {
+        width: 255px;
+        background-color: antiquewhite;
+        border: 1px solid whitesmoke;
+    }
+
+    input[type='checkbox'] {
+        transform: scale(1.5);
+        display: inline-block;
+    }
+
+    button {
+        margin-bottom: 25px;
+        width: 275px;
+    }
+
+    #scroll-to-top {
+        text-align: center;
+        width: 50px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .grid-item {
+        justify-self: flex-start;
+        align-self: center;
+    }
 }
