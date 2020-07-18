@@ -8,6 +8,7 @@ import DateInput from './DateInput';
 import SelectCurrency from './SelectCurrency';
 import CurrencyTable from './CurrencyTable'
 import ErrorDateMessage from './ErrorMessage';
+import Header from './Header';
 
 
 const App = () => {
@@ -156,7 +157,10 @@ const App = () => {
 
     return (
         <Fragment>
-            <div className='container-date'>
+
+            <Header/>
+
+            <div className='container'>
                 <DateInput
                     maxDate={currentDate}
                     handleOnChange={handleDateChange}
@@ -166,9 +170,6 @@ const App = () => {
                     isChecked={checked}
                     handleOnChange={handleIntervalCheck}
                 />
-            </div>
-            <div className='container-select'>
-
 
                 {/*in order to set the state of the Select, it will be performed using onChange and the target is the e.target.value*/}
                 <SelectCurrency
@@ -181,9 +182,9 @@ const App = () => {
             {new Date(date.start) > new Date(date.end) && checked
 
                 ?
-                // if Start Date is bigger than End Date and interval is checked or Start Date is lower than 2015, render Error Message
+                // if Start Date is bigger than End Date and interval is checked, render Error Message
                 <ErrorDateMessage
-                    value={"Start Date cannot be bigger than End Date and Start Date cannot be lower than 2015-01-01. Please pick a valid date interval"}
+                    value={"Start Date cannot be bigger than End Date, please pick a valid date interval"}
                 />
 
 
@@ -192,6 +193,12 @@ const App = () => {
                 <CurrencyTable currencies={data} mainCurrency={selectedCurrency.main}/>
 
             }
+
+            {/*scroll to top button*/}
+            <button id={'scroll-to-top'} onClick={() => window.scroll({top: 0, behavior: 'smooth'})}>
+                Top
+            </button>
+
         </Fragment>
     );
 }

@@ -8,8 +8,8 @@ const SelectCurrency = ({handleCurrencyOnChange, isDisabled, handleSwitchCurrenc
 
             {/* main currency */}
             <label
-                htmlFor='from-currency' style={{marginLeft: '8px'}}>From currency:
-                <select onChange={handleCurrencyOnChange} name='main' className='form'>
+                htmlFor='from-currency' id='from-currency' className='grid-item'>From currency:
+                <select onChange={handleCurrencyOnChange} name='main'>
 
                     {/*use slice to make the array start from 1, meaning that the first currency dropdown cannot be of label "None"*/}
                     {options.slice(1).map((item, index) => (
@@ -20,8 +20,8 @@ const SelectCurrency = ({handleCurrencyOnChange, isDisabled, handleSwitchCurrenc
             </label>
 
             {/*secondary (optional) currency*/}
-            <label htmlFor='to-currency' style={{marginLeft: '20px'}}>To currency:
-                <select onChange={handleCurrencyOnChange} name='optional' className='form'>
+            <label htmlFor='to-currency' id='to-currency' className='grid-item'>To currency:
+                <select onChange={handleCurrencyOnChange} name='optional'>
 
                     {options.map((item, index) => (
                         <option key={index} value={item.value}>{item.label}</option>
@@ -31,6 +31,8 @@ const SelectCurrency = ({handleCurrencyOnChange, isDisabled, handleSwitchCurrenc
             </label>
 
             <button
+                id='switch-currencies'
+                className='grid-item'
                 disabled={isDisabled}
                 onClick={handleSwitchCurrencies}
             >

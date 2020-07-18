@@ -5,11 +5,10 @@ const DateInput = ({maxDate, handleOnChange}) => {
         <Fragment>
 
             {/* start date */}
-            <label htmlFor='Start Date' className='form'>Start Date:
+            <label htmlFor='Start Date' id='start-date' className='grid-item'>Start Date:
                 <input
                     name='start'
                     type='date'
-                    className='form'
                     min='2015-01-01'
                     max={maxDate}
                     onChange={handleOnChange}
@@ -17,11 +16,10 @@ const DateInput = ({maxDate, handleOnChange}) => {
             </label>
 
             {/* end date */}
-            <label htmlFor='End Date' className='form'>End Date:
+            <label htmlFor='End Date' id='end-date' className='grid-item'>End Date:
                 <input
                     name='end'
                     type='date'
-                    className='form'
                     min='2015-01-01'
                     max={maxDate}
                     onChange={handleOnChange}

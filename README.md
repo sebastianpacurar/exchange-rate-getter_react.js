@@ -4,24 +4,33 @@
 ##### The API used to grab data is: ***https://exchangeratesapi.io/***
 <br />
 
+##### There are 2 versions of the project, one with basic CSS, and one with MaterialUI implementation
+
+* branch ***master-basic*** (the branch you are currently viewing) contains the CSS based form.
+
+* branch [***master***](https://github.com/sebastianpacurar/exchange-rate-getter_react.js/tree/master) contains the Material UI implementation form.
+
+<br />
+
 
 # Setup:
-1) **In order to make the project run, you need to have node.js installed**
+1) **In order to make the project run, you need to have node.js installed:**
 
     * Windows users:
-        * please download from [here](https://nodejs.org/en/download/), and perform the installation
+        * please download from [here](https://nodejs.org/en/download/), and perform the installation.
            
     * Linux users:
-        * please follow these [instructions](https://nodejs.org/en/download/package-manager/)
+        * please follow these [instructions](https://nodejs.org/en/download/package-manager/).
         
     * MacOS users:
-        * please download from [here](https://nodejs.org/en/download/), and perform the installation        
+        * please download from [here](https://nodejs.org/en/download/), and perform the installation.
 
 <br />
 
 2) **Install node modules for front-end**:    
-    * Change directory to **<path_to_repo>/exchange-rate-getter_react.js** and run ```npm install``` in the terminal
+    * Change directory to **<path_to_repo>/exchange-rate-getter_react.js** and run ```npm install``` in the terminal. This command will install all the packages featured in package.json file under dependencies and devDependencies properties.
 
+<br />
 
 # How to run
 * Open one terminal, change directory to **<location_of_repo>/exchange-rate-getter_react.js**, and run the following command:
@@ -32,15 +41,6 @@
 
 <br />
 
-
-# SIde Notes:
-* The project contains 2 versions. One in a basic CSS form, and one using Material UI:
-    * branch ***master-basic*** contains the CSS form
-    * branch ***master*** contains the Material UI implementation form
-    
-    
-<br />
-      
     
 # Creator
 * [Sebastian Pacurar](https://github.com/sebastianpacurar)
