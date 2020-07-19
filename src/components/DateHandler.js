@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 
 // MaterialUI related
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +15,10 @@ const useStyles = makeStyles({
         color: 'black',
     },
 
+    textField: {
+        minWidth: 250
+    }
+
 });
 
 
@@ -23,69 +27,110 @@ const DateHandler = ({maxDate, handleDateOnChange, handleIntervalOnChange, isInt
     const classes = useStyles();
 
     return (
-        <Fragment>
+        <Grid
+            container
+            direction="row"
+        >
 
-            <Grid container spacing={5} direction='row'>
-                <Grid item={true} xs={12} md={4}>
-
-                    {/* start date */}
+            {/* start date*/}
+            <Grid
+                item={true}
+                container
+                xs={12}
+                md={4}
+                direction='column'
+                justify='center'
+                alignItems='center'
+                spacing={1}
+            >
+                <Grid item={true}>
                     <InputLabel
                         htmlFor='start'
                         className={classes.label}
                     >
                         Start Date:
                     </InputLabel>
+                </Grid>
+
+                <Grid item={true}>
 
                     <TextField
                         name='start'
+                        className={classes.textField}
                         id='start'
                         type='date'
+                        defaultValue={maxDate}
                         inputProps={{min: '2015-01-01', max: `${maxDate}`}}
                         onChange={handleDateOnChange}
                     />
-
                 </Grid>
 
-                {/* end date */}
-                <Grid item={true} xs={12} md={4}>
+            </Grid>
+
+
+            {/* end date */}
+            <Grid
+                item={true}
+                container
+                xs={12}
+                md={4}
+                direction='column'
+                justify='center'
+                alignItems='center'
+                spacing={1}
+            >
+                <Grid item={true}>
                     <InputLabel
                         htmlFor='end'
                         className={classes.label}
                     >
                         End Date:
                     </InputLabel>
+                </Grid>
+
+                <Grid item={true}>
 
                     <TextField
                         name='end'
+                        className={classes.textField}
                         id='end'
                         type='date'
+                        defaultValue={maxDate}
                         inputProps={{min: '2015-01-01', max: `${maxDate}`}}
                         onChange={handleDateOnChange}
                     />
-
                 </Grid>
 
-                {/* Interval */}
-                <Grid item={true} xs={12} md={4}>
-                    <FormControlLabel
-                        control={
-
-                            <Checkbox
-                                color="primary"
-                                checked={isIntervalChecked}
-                                onChange={handleIntervalOnChange}
-                            />
-
-                        }
-                        label="Interval:"
-                        labelPlacement="top"
-                        className={classes.label}
-                    />
-
-                </Grid>
             </Grid>
 
-        </Fragment>
+
+            {/* Interval */}
+            <Grid
+                item={true}
+                container
+                xs={12}
+                md={4}
+                direction='column'
+                justify='center'
+                alignItems='center'
+            >
+                <FormControlLabel
+                    control={
+
+                        <Checkbox
+                            color="primary"
+                            checked={isIntervalChecked}
+                            onChange={handleIntervalOnChange}
+                        />
+
+                    }
+                    label="Interval:"
+                    labelPlacement="top"
+                    className={classes.label}
+                />
+            </Grid>
+
+        </Grid>
     );
 }
 

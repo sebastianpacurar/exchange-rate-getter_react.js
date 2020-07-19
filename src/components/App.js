@@ -7,10 +7,6 @@ import CurrencyTable from './CurrencyTable'
 import ErrorDateMessage from './ErrorMessage';
 import AppHeader from './Header';
 
-// MaterialUI related
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-
 
 const App = () => {
 
@@ -55,6 +51,18 @@ const App = () => {
 
     // handle the Interval checkbox for multiple dates
     const handleIntervalCheck = e => setIntervalChecked(e.target.checked);
+
+    // handle the switch currencies change
+    const handleSwitchChange = () => {
+
+        const main = selectedCurrency.main
+        const optional = selectedCurrency.optional
+
+        setSelectedCurrency({
+            main: optional,
+            optional: main
+        });
+    }
 
 
     // fetch data from the API whenever the selects or date or intervalChecked states are changed
@@ -149,56 +157,47 @@ const App = () => {
 
     return (
         <Fragment>
-            <Grid container>
-                <Grid item xs={12}>
-                    <AppHeader/>
-                </Grid>
+
+            <AppHeader/>
 
 
-                {/* The reason I used Box Component is because i set body margin to 0 for the App Bar to fit on the whole page,
+            {/* The reason I used Box Component is because i set body margin to 0 for the App Bar to fit on the whole page,
                          Therefore I use Box to perform padding for the rest of the Components
                      */}
-                <Box pl={2}>
-
-                    <Grid item container>
-                        <Grid item xs={12}>
-
-                            <DateHandler
-                                maxDate={currentDate}
-                                handleDateOnChange={e => handleDateChange(e)}
-                                isIntervalChecked={intervalChecked}
-                                handleIntervalOnChange={e => handleIntervalCheck(e)}
-                            />
-
-                        </Grid>
-                    </Grid>
 
 
-                    {/*in order to set the state of the Select, it will be performed using onChange and the target is the e.target.value*/}
-                    <SelectCurrency handleOnChange={e => handleSelectChange(e)}/>
+            <DateHandler
+                maxDate={currentDate}
+                handleDateOnChange={handleDateChange}
+                isIntervalChecked={intervalChecked}
+                handleIntervalOnChange={handleIntervalCheck}
 
-                </Box>
-
-                <Grid item xs={12}>
-                    <Box padding={2}>
-                        {(new Date(date.start) > new Date(date.end) || new Date(date.start) < new Date('2015-01-01')) && intervalChecked
-
-                            ?
-                            // if Start Date is bigger than End Date and interval is intervalChecked or Start Date is lower than 2015, render Error Message
-                            <ErrorDateMessage
-                                value={"Start Date cannot be bigger than End Date and Start Date cannot be lower than 2015-01-01. Please pick a valid date interval"}
-                            />
+            />
 
 
-                            :
-                            // if Start Date is smaller than End Date and interval is not intervalChecked, render table
-                            <CurrencyTable currencies={data} mainCurrency={selectedCurrency.main}/>
+            {/*in order to set the state of the Select, it will be performed using onChange and the target is the e.target.value*/}
+            <SelectCurrency
+                handleOnChange={handleSelectChange}
+                isDisabled={selectedCurrency.optional === 'false'}
+                handleSwitchCurrencies={handleSwitchChange}
+            />
 
-                        }
-                    </Box>
-                </Grid>
 
-            </Grid>
+            {new Date(date.start) > new Date(date.end) && intervalChecked
+
+                ?
+                // if Start Date is bigger than End Date and interval is intervalChecked or Start Date is lower than 2015, render Error Message
+                <ErrorDateMessage
+                    value={"Start Date cannot be bigger than End Date and Start Date cannot be lower than 2015-01-01. Please pick a valid date interval"}
+                />
+
+
+                :
+                // if Start Date is smaller than End Date and interval is not intervalChecked, render table
+                <CurrencyTable currencies={data} mainCurrency={selectedCurrency.main}/>
+
+            }
+
         </Fragment>
     );
 }
