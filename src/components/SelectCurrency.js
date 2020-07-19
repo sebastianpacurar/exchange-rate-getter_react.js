@@ -1,32 +1,113 @@
-import React, {Fragment} from 'react';
-import {options} from "../utils/selectOptions";
+import React from 'react';
+import {options} from '../utils/selectOptions';
 
-const SelectCurrency = ({handleOnChange}) => {
+// MaterialUI related
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+
+
+const useStyles = makeStyles(theme => ({
+
+    formControl: {
+        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(2),
+        minWidth: 250,
+    },
+}));
+
+const SelectCurrency = ({handleOnChange, isDisabled, handleSwitchCurrencies}) => {
+
+    const classes = useStyles();
 
     return (
-        <Fragment>
+        <Grid
+            container
+            direction="row"
+        >
 
             {/* main currency */}
-            <label className='form' htmlFor='from-currency'>From currency:</label>
-            <select onChange={handleOnChange} name='main'>
+            <Grid
+                item={true}
+                container
+                xs={12}
+                md={4}
+                direction='column'
+                justify='center'
+                alignItems='center'
+                spacing={1}
+            >
 
-                {/*use slice to make the array start from 1, meaning that the first currency dropdown cannot be of label "None"*/}
-                {options.slice(1).map((item, index) => (
-                    <option key={index} value={item.value}>{item.label}</option>
-                ))}
+                <FormControl variant='filled' className={classes.formControl}>
+                    <InputLabel htmlFor='from-currency'>From Currency</InputLabel>
+                    <Select
+                        name='main'
+                        onChange={handleOnChange}
+                        defaultValue='AUD'
+                    >
+                        {options.slice(1).map((item, index) => (
+                            <MenuItem key={index} value={item.value}>{item.label}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </Grid>
 
-            </select>
+            {/* optional currency */}
+            <Grid
+                item={true}
+                container
+                xs={12}
+                md={4}
+                direction='column'
+                justify='center'
+                alignItems='center'
+                spacing={1}
+            >
 
-            {/*secondary (optional) currency*/}
-            <label className='form' htmlFor='to-currency'>To currency:</label>
-            <select onChange={handleOnChange} name='optional'>
+                <FormControl variant='filled' className={classes.formControl}>
+                    <InputLabel htmlFor='to-currency'>To Currency</InputLabel>
+                    <Select
+                        name='optional'
+                        onChange={handleOnChange}
+                    >
+                        {options.map((item, index) => (
+                            <MenuItem key={index} value={item.value}>{item.label}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
 
-                {options.map((item, index) => (
-                    <option key={index} value={item.value}>{item.label}</option>
-                ))}
+            </Grid>
 
-            </select>
-        </Fragment>
+            {/* switch currencies button */}
+            <Grid
+                item={true}
+                container
+                xs={12}
+                md={4}
+                direction='column'
+                justify='center'
+                alignItems='center'
+                spacing={1}
+            >
+
+                <FormControl variant='filled' className={classes.formControl}>
+                    <Button
+                        variant='outlined'
+                        color='primary'
+                        className='grid-item'
+                        disabled={isDisabled}
+                        onClick={handleSwitchCurrencies}
+                    >
+                        Switch Currencies
+                    </Button>
+                </FormControl>
+
+            </Grid>
+        </Grid>
     )
 }
 

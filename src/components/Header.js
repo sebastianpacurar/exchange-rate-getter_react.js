@@ -2,12 +2,11 @@ import React from 'react';
 import classNames from 'classnames';
 
 // MaterialUI related
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-    makeStyles
-} from "@material-ui/core";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 
 const useStyles = makeStyles({
@@ -29,21 +28,25 @@ const AppHeader = () => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <AppBar
-                position="static"
-                className={classNames(classes.appBar, classes.bottom)}
-                color='primary'
-            >
-                <Toolbar>
+        <Grid container>
+            <Grid item xs={12}>
+                <div className={classes.root}>
+                    <AppBar
+                        position="static"
+                        className={classNames(classes.appBar, classes.bottom)}
+                        color='primary'
+                    >
+                        <Toolbar>
 
-                    <Typography variant='h4' align='center'>
-                        Exchange Rate Getter
-                    </Typography>
+                            <Typography variant='h4' align='center'>
+                                Exchange Rate Getter
+                            </Typography>
 
-                </Toolbar>
-            </AppBar>
-        </div>
+                        </Toolbar>
+                    </AppBar>
+                </div>
+            </Grid>
+        </Grid>
     );
 }
 

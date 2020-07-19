@@ -1,6 +1,6 @@
 // options are composed of 2 properties: values and labels
 export const options = [
-    {value: false, label: 'None'},
+    {value: 'false', label: 'None'},
     {value: 'AUD', label: 'Australian Dollar'},
     {value: 'BGN', label: 'Bulgarian Lev'},
     {value: 'BRL', label: 'Brazilian Real'},
