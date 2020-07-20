@@ -48,7 +48,7 @@ const SelectCurrency = ({handleCurrencyOnChange, isDisabled, handleSwitchCurrenc
             </label>
 
             <button
-                id='switch-currencies'
+                id='switch-currencies-btn'
                 className='grid-item'
                 disabled={isDisabled}
                 onClick={handleSwitchCurrencies}
