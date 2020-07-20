@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: navajowhite;
+    user-select: none;
 }
 
 #header {
@@ -43,6 +44,7 @@ td {
     border: 1px solid #8a2be2;
     text-align: center;
     padding: 8px;
+    user-select: text;
 }
 
 tr:nth-child(even) {
@@ -109,7 +111,8 @@ p {
     text-align: center;
 }
 
-button {
+#switch-currencies-btn {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     background-color: yellowgreen;
     border: none;
     border-radius: .5em;
@@ -123,15 +126,15 @@ button {
     margin-top: 25px;
 }
 
-button:hover {
+#switch-currencies-btn:hover {
     background-color: lightsalmon;
 }
 
-button:active {
+#switch-currencies-btn:active {
     background-color: lightseagreen;
 }
 
-button:disabled {
+#switch-currencies-btn:disabled {
     background-color: #a9a9a9;
 }
 
@@ -156,10 +159,11 @@ button:disabled {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(100px, auto);
-
+    grid-row-gap: 15px;
     grid-template-areas:
     "start end interval"
     "from to switch";
+    margin-bottom: 15px;
 }
 
 #start-date {
@@ -182,7 +186,7 @@ button:disabled {
     grid-area: to
 }
 
-#switch-currencies {
+#switch-currencies-btn {
     grid-area: switch
 }
 
@@ -191,34 +195,25 @@ button:disabled {
     align-self: center;
 }
 
-/* for screen smaller than 1000 px, apply mobile view*/
-@media screen and (max-width: 1000px) {
+
+/* for screen between 650px and 1000 px */
+@media screen and (min-width: 650px) and (max-width: 1000px) {
     .container {
         display: grid;
-        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-template-areas:
-        "start"
-        "end"
-        "interval"
-        "from"
-        "switch"
-        "to";
+        "start from"
+        "end to"
+        "interval switch";
     }
 
     input[type='date'] {
         width: 255px;
-        background-color: antiquewhite;
-        border: 1px solid whitesmoke;
     }
 
-    input[type='checkbox'] {
-        transform: scale(1.5);
-        display: inline-block;
-    }
-
-    button {
-        margin-bottom: 25px;
+    #switch-currencies-btn {
         width: 275px;
+        align-self: flex-start;
     }
 
     #scroll-to-top {
@@ -230,7 +225,109 @@ button:disabled {
     }
 
     .grid-item {
-        justify-self: flex-start;
+        justify-self: center;
+        align-self: center;
+    }
+}
+
+
+/* for screen between 355px and 650 px */
+@media screen and (min-width: 355px) and (max-width: 650px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(75px, auto);
+        grid-template-areas:
+        "start from"
+        "end to"
+        "interval switch";
+        margin-bottom: 0;
+    }
+
+    label {
+        font-size: 17px;
+    }
+
+    input[type='date'] {
+        width: 150px;
+    }
+
+    select {
+        width: 170px;
+        text-indent: 1px;
+        font-size: 12px;
+    }
+
+    #switch-currencies-btn {
+        width: 170px;
+        margin-bottom: 25px;
+    }
+
+    #scroll-to-top {
+        text-align: center;
+        width: 50px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .grid-item {
+        justify-self: center;
+        align-self: center;
+    }
+}
+
+
+/* for screen between 0px and 355 px */
+@media screen and (min-width: 0px) and (max-width: 355px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: minmax(35px, auto);
+        grid-template-areas:
+        "start"
+        "end"
+        "interval"
+        "from"
+        "switch"
+        "to";
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    input[type='date'] {
+        width: 150px;
+    }
+
+    #switch-currencies-btn {
+        margin-bottom: 25px;
+        width: 275px;
+    }
+
+    select {
+        width: 170px;
+        text-indent: 1px;
+        font-size: 12px;
+    }
+
+    #switch-currencies-btn {
+        width: 170px;
+        margin-bottom: 25px;
+    }
+
+    #scroll-to-top {
+        text-align: center;
+        width: 50px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .grid-item {
+        justify-self: center;
         align-self: center;
     }
 }
