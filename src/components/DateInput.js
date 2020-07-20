@@ -22,6 +22,7 @@ const DateInput = ({maxDate, handleOnChange}) => {
                     type='date'
                     min='2015-01-01'
                     max={maxDate}
+                    defaultValue={maxDate}
                     onChange={handleOnChange}
                 />
             </label>

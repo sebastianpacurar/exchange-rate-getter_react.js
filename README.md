@@ -4,7 +4,7 @@
 ##### The API used to grab data is: ***https://exchangeratesapi.io/***
 <br />
 
-##### There are 2 versions of the project, one with basic CSS, and one with MaterialUI implementation
+##### There are 2 versions of the project, one with CSS, and one with MaterialUI implementation
 
 * branch ***master-basic*** (the branch you are currently viewing) contains the CSS based form.
 

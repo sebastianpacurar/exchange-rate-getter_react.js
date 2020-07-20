@@ -6,8 +6,8 @@ const CurrencyTable = ({currencies, mainCurrency}) => {
 
             <thead>
             <tr>
-                <th>Currency Code</th>
-                <th>1 {mainCurrency} equals to</th>
+                <th>Currency</th>
+                <th>1 {mainCurrency.value} equals to</th>
                 <th>Date</th>
             </tr>
             </thead>
@@ -16,7 +16,7 @@ const CurrencyTable = ({currencies, mainCurrency}) => {
             {/*the data displayed will be in this order: currency, value, date*/}
             {currencies.map((item, index) => (
                 <tr key={index}>
-                    <td>{item.currency}</td>
+                    <td>{item.currName} {item.currSymbol}</td>
                     <td>{item.value}</td>
                     <td>{item.date}</td>
                 </tr>
