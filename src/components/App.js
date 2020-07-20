@@ -1,4 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import {options} from '../utils/selectOptions';
 import '../index.css';
 
 
@@ -27,8 +28,14 @@ const App = () => {
 
     // the state used to grab information from the SelectCurrency component
     const [selectedCurrency, setSelectedCurrency] = useState({
-        main: 'AUD',
-        optional: 'false',
+        main: {
+            value: 'AUD',
+            label: 'Australian Dollar'
+        },
+        optional: {
+            value: 'false',
+            label: 'None'
+        }
     });
 
     // the state used for grabbing the API data
@@ -46,7 +53,10 @@ const App = () => {
     const handleSelectChange = e => {
 
         setSelectedCurrency({
-            ...selectedCurrency, [e.target.name]: e.target.value
+            ...selectedCurrency, [e.target.name]: {
+                value: e.target.value,
+                label: e.target.selectedOptions[0].label
+            }
         });
     }
 
@@ -60,8 +70,14 @@ const App = () => {
         const optional = selectedCurrency.optional
 
         setSelectedCurrency({
-            main: optional,
-            optional: main
+            main: {
+                value: optional.value,
+                label: optional.label,
+            },
+            optional: {
+                value: main.value,
+                label: main.label
+            }
         });
     }
 
@@ -71,12 +87,12 @@ const App = () => {
         // fetch data from the API for the given details
         const fetchData = async () => {
 
-            let url = `https://api.exchangeratesapi.io/latest?base=${selectedCurrency.main}`;
+            let url = `https://api.exchangeratesapi.io/latest?base=${selectedCurrency.main.value}`;
             const result = [];
 
             if (!checked) {
 
-                if (selectedCurrency.optional !== 'false') url = `https://api.exchangeratesapi.io/latest?symbols=${selectedCurrency.optional}&base=${selectedCurrency.main}`
+                if (selectedCurrency.optional.value !== 'false') url = `https://api.exchangeratesapi.io/latest?symbols=${selectedCurrency.optional.value}&base=${selectedCurrency.main.value}`
 
                 const response = await fetch(url);
                 const jsonData = await response.json();
@@ -86,14 +102,14 @@ const App = () => {
 
                     // parse the data into an array of object elements
                     if (currencies.hasOwnProperty(curr)) {
-                        result.push({'currency': curr, 'value': currencies[curr], 'date': currentDate});
+                        result.push({'currSymbol': curr, 'value': currencies[curr], 'date': currentDate});
                     }
                 }
 
             } else {
 
                 // in case there only the main option is selected, bring the results for all currencies in the values of the selected main currency
-                url = `https://api.exchangeratesapi.io/history?start_at=${date.start}&end_at=${date.end}&base=${selectedCurrency.main}`;
+                url = `https://api.exchangeratesapi.io/history?start_at=${date.start}&end_at=${date.end}&base=${selectedCurrency.main.value}`;
 
                 // if start date is equal to current date, start will be equal to yesterday
                 if (date.start === currentDate) {
@@ -101,21 +117,21 @@ const App = () => {
                     minDate.setDate(minDate.getDate() - 1)
                     const yesterday = minDate.toISOString().split('T')[0];
 
-                    url = `https://api.exchangeratesapi.io/history?start_at=${yesterday}&end_at=${date.end}&base=${selectedCurrency.main}`
+                    url = `https://api.exchangeratesapi.io/history?start_at=${yesterday}&end_at=${date.end}&base=${selectedCurrency.main.value}`
 
                     // if optional currency is checked add symbol
-                    if (selectedCurrency.optional !== 'false') {
-                        url = `https://api.exchangeratesapi.io/history?start_at=${yesterday}&end_at=${date.end}&symbols=${selectedCurrency.optional}&base=${selectedCurrency.main}`
+                    if (selectedCurrency.optional.value !== 'false') {
+                        url = `https://api.exchangeratesapi.io/history?start_at=${yesterday}&end_at=${date.end}&symbols=${selectedCurrency.optional.value}&base=${selectedCurrency.main.value}`
                     }
                 }
 
                 // if start day is not equal to current date
                 else {
-                    url = `https://api.exchangeratesapi.io/history?start_at=${date.start}&end_at=${date.end}&symbols=${selectedCurrency.optional}&base=${selectedCurrency.main}`
+                    url = `https://api.exchangeratesapi.io/history?start_at=${date.start}&end_at=${date.end}&symbols=${selectedCurrency.optional.value}&base=${selectedCurrency.main.value}`
 
                     // if optional currency is set to None, remove symbols
-                    if (selectedCurrency.optional === 'false') {
-                        url = `https://api.exchangeratesapi.io/history?start_at=${date.start}&end_at=${date.end}&base=${selectedCurrency.main}`
+                    if (selectedCurrency.optional.value === 'false') {
+                        url = `https://api.exchangeratesapi.io/history?start_at=${date.start}&end_at=${date.end}&base=${selectedCurrency.main.value}`
                     }
                 }
 
@@ -131,7 +147,7 @@ const App = () => {
                         for (let curr in items[dateVal]) {
 
                             if (items[dateVal].hasOwnProperty(curr)) {
-                                result.push({'currency': curr, 'value': items[dateVal][curr], 'date': dateVal});
+                                result.push({'currSymbol': curr, 'value': items[dateVal][curr], 'date': dateVal});
                             }
                         }
                     }
@@ -145,6 +161,18 @@ const App = () => {
                     return firstDate - secondDate;
                 });
             }
+
+            // add the formatted currency name as a property for every object
+            for (let item of options) {
+                for (let i = 0; i < result.length; i++) {
+                    if (item.value === result[i].currSymbol) {
+                        const trimmed = item.label.split(' ');
+                        trimmed.pop();
+                        result[i]['currName'] = trimmed.join(' ');
+                    }
+                }
+            }
+
             return result;
         };
 
@@ -174,7 +202,7 @@ const App = () => {
                 {/*in order to set the state of the Select, it will be performed using onChange and the target is the e.target.value*/}
                 <SelectCurrency
                     handleCurrencyOnChange={handleSelectChange}
-                    isDisabled={selectedCurrency.optional === 'false'}
+                    isDisabled={selectedCurrency.optional.value === 'false'}
                     handleSwitchCurrencies={handleSwitchChange}
                 />
             </div>

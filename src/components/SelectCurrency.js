@@ -6,25 +6,42 @@ const SelectCurrency = ({handleCurrencyOnChange, isDisabled, handleSwitchCurrenc
     return (
         <Fragment>
 
-            {/* main currency */}
             <label
-                htmlFor='from-currency' id='from-currency' className='grid-item'>From currency:
+                htmlFor='from-curr'
+                id='from-currency'
+                className='grid-item'
+            >
+                From currency:
                 <select onChange={handleCurrencyOnChange} name='main'>
 
                     {/*use slice to make the array start from 1, meaning that the first currency dropdown cannot be of label "None"*/}
                     {options.slice(1).map((item, index) => (
-                        <option key={index} value={item.value}>{item.label}</option>
+                        <option
+                            id='from-curr'
+                            key={index}
+                            value={item.value}
+                            label={item.label}
+                        />
                     ))}
 
                 </select>
             </label>
 
-            {/*secondary (optional) currency*/}
-            <label htmlFor='to-currency' id='to-currency' className='grid-item'>To currency:
+            <label
+                htmlFor='to-curr'
+                id='to-currency'
+                className='grid-item'
+            >
+                To currency:
                 <select onChange={handleCurrencyOnChange} name='optional'>
 
                     {options.map((item, index) => (
-                        <option key={index} value={item.value}>{item.label}</option>
+                        <option
+                            id='to-curr'
+                            key={index}
+                            value={item.value}
+                            label={item.label}
+                        />
                     ))}
 
                 </select>
@@ -42,5 +59,6 @@ const SelectCurrency = ({handleCurrencyOnChange, isDisabled, handleSwitchCurrenc
         </Fragment>
     )
 }
+
 
 export default SelectCurrency;
