@@ -27,20 +27,13 @@ const SelectCurrency = ({handleOnChange, isDisabled, handleSwitchCurrencies}) =>
     return (
         <Grid
             container
-            direction="row"
+            direction='row'
+            justify='space-around'
+            spacing={1}
         >
 
             {/* main currency */}
-            <Grid
-                item={true}
-                container
-                xs={12}
-                md={4}
-                direction='column'
-                justify='center'
-                alignItems='center'
-                spacing={1}
-            >
+            <Grid item>
 
                 <FormControl variant='filled' className={classes.formControl}>
                     <InputLabel htmlFor='from-currency'>From Currency</InputLabel>
@@ -57,16 +50,7 @@ const SelectCurrency = ({handleOnChange, isDisabled, handleSwitchCurrencies}) =>
             </Grid>
 
             {/* optional currency */}
-            <Grid
-                item={true}
-                container
-                xs={12}
-                md={4}
-                direction='column'
-                justify='center'
-                alignItems='center'
-                spacing={1}
-            >
+            <Grid item>
 
                 <FormControl variant='filled' className={classes.formControl}>
                     <InputLabel htmlFor='to-currency'>To Currency</InputLabel>
@@ -83,16 +67,7 @@ const SelectCurrency = ({handleOnChange, isDisabled, handleSwitchCurrencies}) =>
             </Grid>
 
             {/* switch currencies button */}
-            <Grid
-                item={true}
-                container
-                xs={12}
-                md={4}
-                direction='column'
-                justify='center'
-                alignItems='center'
-                spacing={1}
-            >
+            <Grid item>
 
                 <FormControl variant='filled' className={classes.formControl}>
                     <Button
